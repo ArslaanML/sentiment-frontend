@@ -1,0 +1,22 @@
+
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+}
+
+textarea {
+  width: 80%;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.result {
+  margin-top: 2rem;
+}
