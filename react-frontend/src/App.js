@@ -10,17 +10,23 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://arslaanml-sentiment-space.hf.space/api/predict/", {
+      const res = await fetch("https://arslaanml-sentiment-space.hf.space/run/predict", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: [text] }),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data: [text]
+        })
       });
-
+  
       const data = await res.json();
+      // Gradio responds with: { data: [sentiment, confidence] }
       setResult({
         sentiment: data.data[0],
-        confidence: data.data[1] || "N/A", // Only if you're returning confidence
+        confidence: data.data[1]
       });
+  
     } catch (err) {
       console.error("Error fetching prediction:", err);
       setResult({ sentiment: "Error", confidence: "N/A" });
@@ -28,6 +34,7 @@ function App() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="App">
