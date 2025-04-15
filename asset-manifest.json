@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/sentiment-frontend/static/css/main.37e0cdb5.css",
-    "main.js": "/sentiment-frontend/static/js/main.fe9555d1.js",
+    "main.js": "/sentiment-frontend/static/js/main.d125c92d.js",
     "index.html": "/sentiment-frontend/index.html",
     "main.37e0cdb5.css.map": "/sentiment-frontend/static/css/main.37e0cdb5.css.map",
-    "main.fe9555d1.js.map": "/sentiment-frontend/static/js/main.fe9555d1.js.map"
+    "main.d125c92d.js.map": "/sentiment-frontend/static/js/main.d125c92d.js.map"
   },
   "entrypoints": [
     "static/css/main.37e0cdb5.css",
-    "static/js/main.fe9555d1.js"
+    "static/js/main.d125c92d.js"
   ]
 }
