@@ -10,22 +10,19 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(
-        "https://arslaanml-sentiment-space.hf.space/run/predict_sentiment",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ data: [text] }),
-        }
-      );
-
-      const response = await res.json();
-
-      const [sentiment, confidence] = response.data;
-
+      const res = await fetch("https://arslaanml-sentiment-space.hf.space/run/predict_sentiment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data: [text] }),
+      });
+  
+      const result = await res.json();
+      const sentiment = result.data?.[0]?.sentiment || "Unknown";
+      const confidence = result.data?.[0]?.confidence || "N/A";
+  
       setResult({
         sentiment,
-        confidence: `${confidence}%`,
+        confidence,
       });
     } catch (err) {
       console.error("Error fetching prediction:", err);
@@ -34,6 +31,7 @@ function App() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="App">
