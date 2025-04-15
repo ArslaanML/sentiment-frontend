@@ -10,23 +10,23 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://arslaanml-sentiment-space.hf.space/run/predict", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          data: [text]
-        })
-      });
-  
-      const data = await res.json();
-      // Gradio responds with: { data: [sentiment, confidence] }
+      const res = await fetch(
+        "https://arslaanml-sentiment-space.hf.space/run/predict_sentiment",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data: [text] }),
+        }
+      );
+
+      const response = await res.json();
+
+      const [sentiment, confidence] = response.data;
+
       setResult({
-        sentiment: data.data[0],
-        confidence: data.data[1]
+        sentiment,
+        confidence: `${confidence}%`,
       });
-  
     } catch (err) {
       console.error("Error fetching prediction:", err);
       setResult({ sentiment: "Error", confidence: "N/A" });
@@ -34,7 +34,6 @@ function App() {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="App">
@@ -48,14 +47,19 @@ function App() {
           placeholder="Enter your text here..."
         />
         <br />
-        <button type="submit">Analyze</button>
+        <button type="submit" disabled={loading || !text.trim()}>
+          {loading ? "Analyzing..." : "Analyze"}
+        </button>
       </form>
-      {loading && <p>Analyzing...</p>}
       {result && (
         <div className="result">
           <h2>Result</h2>
-          <p><strong>Sentiment:</strong> {result.sentiment}</p>
-          <p><strong>Confidence:</strong> {result.confidence}</p>
+          <p>
+            <strong>Sentiment:</strong> {result.sentiment}
+          </p>
+          <p>
+            <strong>Confidence:</strong> {result.confidence}
+          </p>
         </div>
       )}
     </div>
